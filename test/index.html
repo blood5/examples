@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="./libs/r2d.min.js"></script>
+    <script type="text/javascript">
+      var box = new r2d.ElementBox();
+      var network = new r2d.vector.Network(box);
+
+      function init() {
+        initNetwork();
+        initDataBox();
+      }
+
+      function initNetwork() {
+        var view = network.getView();
+        document.body.appendChild(view);
+
+        function findDimensions() {
+          if (window.innerWidth) winWidth = window.innerWidth;
+          else if (document.body && document.body.clientWidth)
+            winWidth = document.body.clientWidth;
+          if (window.innerHeight) winHeight = window.innerHeight;
+          else if (document.body && document.body.clientHeight)
+            winHeight = document.body.clientHeight;
+          if (
+            document.documentElement &&
+            document.documentElement.clientHeight &&
+            document.documentElement.clientWidth
+          ) {
+            winHeight = document.documentElement.clientHeight;
+            winWidth = document.documentElement.clientWidth;
+          }
+        }
+        findDimensions();
+        network.adjustBounds({
+          x: 0,
+          y: 0,
+          width: winWidth,
+          height: winHeight,
+        });
+        window.onresize = function(e) {
+          findDimensions();
+          network.adjustBounds({
+            x: 0,
+            y: 0,
+            width: winWidth,
+            height: winHeight,
+          });
+        };
+        network.getView().style.backgroundColor = '#a3cbe2';
+      }
+
+      function initDataBox() {
+        var from = new r2d.Node({
+          name: 'From',
+          location: {
+            x: 200,
+            y: 100,
+          },
+        });
+        box.add(from);
+
+        var to = new r2d.Node({
+          name: 'To',
+          location: {
+            x: 1100,
+            y: 600,
+          },
+        });
+        box.add(to);
+
+        var link = new r2d.Link(
+          {
+            styles: {
+              'link.type': 'orthogonal.horizontal',
+              'link.pattern': [20, 10],
+              'link.width': 10,
+              'link.color': 'white',
+              'link.flow.color': 'green',
+            },
+          },
+          from,
+          to
+        );
+        box.add(link);
+      }
+    </script>
+  </head>
+
+  <body onload="init()"></body>
+</html>
