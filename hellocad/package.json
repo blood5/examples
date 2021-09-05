@@ -1,0 +1,22 @@
+{
+    "name": "framework-example-dev",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "start": "parcel index.html --open",
+        "build": "parcel build index.html"
+    },
+    "dependencies": {
+        "@jscad/modeling": "2.2.0",
+        "parcel-bundler": "^1.6.1",
+        "three": "0.128.0"
+    },
+    "devDependencies": {
+        "@babel/core": "7.2.0"
+    },
+    "resolutions": {
+        "@babel/preset-env": "7.13.8"
+    },
+    "keywords": []
+}
